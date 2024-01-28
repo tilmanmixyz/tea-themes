@@ -59,24 +59,36 @@
 (defface tea-fg nil "Foreground face for tea-themes." :group 'faces)
 
 (defun tea-themes-create (variant theme-name)
-  "Define colors with VARIANT and THEME-NAME."
-  (let ((class '((class 'color)) (min-colors 89)))
-    (tea-bg (cond ((eq variant 'dark) "#282828") ((eq variant 'light) "#fbf1c7")))
-    (tea-fg (cond ((eq variant 'dark) "#ebdbb2") ((eq variant 'light) "#3c3836"))))
+  "Define theme colors for VARIANT and THEME-NAME."
+  (let ((class '((class color) (min-colors 89)))
+        (tea-bg (cond ((eq variant 'dark) "#282828") ((eq variant 'light) "#fbf1c7")))
+        (tea-fg (cond ((eq variant 'dark) "#ebdbb2") ((eq variant 'light) "#3c3836"))))
 
-  (cl-loop for (cvar . val) in tea-themes-custom-colors
-           do (set cvar . val))
-  (custom-theme-set-faces
-   theme-name
-   '(default ((,class (:background ,tea-bg :foreground ,tea-fg))))))
+    (cl-loop for (cvar . val) in tea-themes-custom-colors
+             do (set cvar val))
+
+    (custom-theme-set-faces
+     theme-name
+     `(default ((,class (:background ,tea-bg :foreground ,tea-fg))))
+     `(cursor ((,class (:background ,tea-fg))))
+     `(fringe ((,class (:background ,tea-bg :weight light))))
+    )))
 
 ;;; Provide file
 ;;;###autoload
-(and load-file-name
-     (boundp 'custom-theme-load-path)
-     (add-to-list 'custom-theme-load-path
-                  (file-name-as-directory
-                   (file-name-directory load-file-name))))
+;; (and load-file-name
+;;      (boundp 'custom-theme-load-path)
+;;      (add-to-list 'custom-theme-load-path
+;;                   (file-name-as-directory
+;;                    (file-name-directory load-file-name))))
+
+;;;###autoload
+(when (and (boundp 'custom-theme-load-path) load-file-name)
+  (let* ((base (file-name-directory load-file-name))
+         (dir (expand-file-name (file-name-as-directory "themes") base)))
+    (add-to-list 'custom-theme-load-path
+                 (or (and (file-directory-p dir) dir)
+                     base))))
 
 (provide 'tea-themes)
 ;;; tea-themes.el ends here

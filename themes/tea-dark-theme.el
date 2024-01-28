@@ -30,7 +30,7 @@
 
 (require 'tea-themes)
 
-(deftheme 'tea-dark "Tea Theme, Dark Version")
+(deftheme tea-dark "Tea Theme, Dark Version.")
 
 (tea-themes-create 'dark 'tea-dark)
 
