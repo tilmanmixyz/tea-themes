@@ -32,8 +32,8 @@
 (eval-when-compile
   (require 'cl-macs))
 
-(unless (>= emacs-version 25)
-  (error "Required GNU Emacs version 25 or later"))
+(unless (>= emacs-major-version 25)
+  (error "Required GNU Emacs major version 25 or later"))
 
 (defcustom tea-themes-italic-comments t
   "If t, use italics for comments."
