@@ -79,17 +79,8 @@
 (and load-file-name
      (boundp 'custom-theme-load-path)
      (add-to-list 'custom-theme-load-path
-                  (concat
                   (file-name-as-directory
-                   (file-name-directory load-file-name)))) "themes")
-
-;;;###autoload
-;; (when (and (boundp 'custom-theme-load-path) load-file-name)
-;;   (let* ((base (file-name-directory load-file-name))
-;;          (dir (expand-file-name (file-name-as-directory "themes") base)))
-;;     (add-to-list 'custom-theme-load-path
-;;                  (or (and (file-directory-p dir) dir)
-;;                      base))))
+                   (file-name-directory load-file-name))))
 
 (provide 'tea-themes)
 ;;; tea-themes.el ends here
