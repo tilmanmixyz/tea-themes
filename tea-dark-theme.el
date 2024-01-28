@@ -1,4 +1,4 @@
-;;; tea-theme.el --- A custom theme  -*- lexical-binding: t; -*-
+;;; tea-themes.el --- A custom theme  -*- lexical-binding: t; -*-
 ;; Copyright (C) 2024 Tilman Andre Mix
 ;; -------------------------------------------------------------------
 ;; Authors: Colin McLear
@@ -28,9 +28,12 @@
 
 ;;; Code:
 
-;;;; Requirements
-(eval-when-compile
-  (require 'cl-macs))
+(require 'tea-themes)
 
-(provide 'tea-theme)
-;;; tea-theme.el ends here
+(deftheme 'tea-dark "Tea Theme, Dark Version")
+
+(tea-themes-create 'dark 'tea-dark)
+
+(provide-theme 'tea-dark)
+(provide 'tea-dark-theme)
+;;; tea-dark-theme.el ends here
